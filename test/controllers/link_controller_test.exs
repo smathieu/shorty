@@ -2,7 +2,7 @@ defmodule Shorty.LinkControllerTest do
   use Shorty.ConnCase
 
   alias Shorty.Link
-  @valid_attrs %{key: "some content", url: "some content"}
+  @valid_attrs %{key: "google", url: "http://example.com"}
   @invalid_attrs %{}
 
   setup do
@@ -32,14 +32,14 @@ defmodule Shorty.LinkControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    link = Repo.insert! %Link{}
-    conn = get conn, link_path(conn, :show, link)
-    assert html_response(conn, 200) =~ "Show link"
+    link = Repo.insert! %Link{key: "google", url: "http://example.com"}
+    conn = get conn, shortlink_path(conn, :show, link.key)
+    assert redirected_to(conn) == "http://example.com"
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
     assert_raise Ecto.NoResultsError, fn ->
-      get conn, link_path(conn, :show, -1)
+      get conn, shortlink_path(conn, :show, -1)
     end
   end
 

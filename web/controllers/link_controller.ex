@@ -29,8 +29,8 @@ defmodule Shorty.LinkController do
   end
 
   def show(conn, %{"key" => key}) do
-    link = Repo.get!(Link, 1)
-    render(conn, "show.html", link: link)
+    link = Repo.get_by!(Link, key: key)
+    redirect(conn, external: link.url)
   end
 
   def edit(conn, %{"id" => id}) do
