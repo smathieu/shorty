@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/smathieu/shorty.svg?branch=master)](https://travis-ci.org/smathieu/shorty)
+
 # Shorty
 
 To start your Phoenix app:
