@@ -2,7 +2,7 @@ defmodule Shorty.LinkControllerTest do
   use Shorty.ConnCase
 
   alias Shorty.Link
-  @valid_attrs %{key: "google", url: "http://example.com"}
+  @valid_attrs %{url: "http://example.com"}
   @invalid_attrs %{}
 
   setup do
@@ -50,7 +50,7 @@ defmodule Shorty.LinkControllerTest do
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    link = Repo.insert! %Link{}
+    link = Repo.insert! %Link{key: "lol"}
     conn = put conn, link_path(conn, :update, link), link: @valid_attrs
     assert redirected_to(conn) == link_path(conn, :show, link)
     assert Repo.get_by(Link, @valid_attrs)

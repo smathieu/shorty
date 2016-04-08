@@ -16,6 +16,9 @@ defmodule Shorty.LinkController do
   end
 
   def create(conn, %{"link" => link_params}) do
+    link_params = Map.merge(link_params,
+      %{"key" => Shorty.ShortcodeController.generate})
+
     changeset = Link.changeset(%Link{}, link_params)
 
     case Repo.insert(changeset) do
